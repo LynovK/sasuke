@@ -1,9 +1,27 @@
 import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(12, GPIO.OUT)
+import time
 
-p = GPIO.PWM(12, 0.5)
-p.start(1)
-input('Press return to stop:')   # use raw_input for Python 2
-p.stop()
-GPIO.cleanup()
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(22, GPIO.OUT, initial = 0)
+p = GPIO.PWM(22, 10)
+ 
+def ChangeDutyCycle(dutycycle):
+    p.start(dutycycle)
+
+try:
+    while True:
+        inputStr = input("Введите число от 0 до 100, 'q' для выхода >")
+
+        if inputStr.isdigit():
+            dutycycle = int(inputStr)
+            if dutycycle > 100:
+                print ("Error")
+                continue
+            ChangeDutyCycle(dutycycle)
+        elif inputStr == 'q':
+            break
+        else:
+            print ("Error")
+finally:
+    p.stop()
+    GPIO.cleanup()
