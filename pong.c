@@ -99,8 +99,8 @@ int main()
 int iBallLRej(int iBallXPosition, int iBallYPosition, int ILRocketPosition)//отталкивания от левой ракетки
 {
     if((iBallXPosition == ILRocketPosition && iBallYPosition ==  11)||
-        (iBallXPosition == ILRocketPosition && iBallYPosition ==  11)||
-        (iBallXPosition == ILRocketPosition && iBallYPosition ==  11))
+        (iBallXPosition == (ILRocketPosition - 1) && iBallYPosition ==  11)||
+        (iBallXPosition == (ILRocketPosition + 1)&& iBallYPosition ==  11))
     {
         iDirectionY = -1;
     }
